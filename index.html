@@ -27,6 +27,16 @@
     }
   </script>
 
+  <!-- QRCode Library (local & CDN fallback) -->
+  <script src="qrcode.min.js"></script>
+  <script>
+    if (typeof QRCode === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      document.head.appendChild(script);
+    }
+  </script>
+
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
@@ -39,6 +49,10 @@
     .card-glow:hover {
       box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
     }
+    .modal-backdrop {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+    }
   </style>
 </head>
 <body class="min-h-screen flex justify-center items-start sm:py-8 px-4">
@@ -46,14 +60,25 @@
   <div class="w-full max-w-lg flex flex-col space-y-6 pb-12">
     
     <!-- Header -->
-    <header class="pt-6 text-center space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-indigo-400 mb-1">
+    <header class="pt-6 text-center space-y-2.5">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-indigo-400 mb-1 shadow-sm">
         <span>🚀 Suite de Negocios Independientes</span>
       </div>
       <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Mis Mini Apps</h1>
       <p class="text-xs sm:text-sm text-slate-400 max-w-sm mx-auto">
-        Panel central de accesos directos. Abrí o compartí cualquier app en 1 toque.
+        Panel central de accesos directos. Abrí, compartí o escaneá con QR en 1 toque.
       </p>
+
+      <!-- Botón para compartir el Portal completo con QR -->
+      <div class="pt-1">
+        <button 
+          onclick="showAppQR('Portal Central de Mini Apps', 'https://juancdgo.github.io/portal/', '🌐')"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-xs rounded-2xl shadow-lg border border-indigo-400/30 active:scale-95 transition-all"
+        >
+          <span>📷 Ver QR de este Portal</span>
+          <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full font-black">Todas las apps</span>
+        </button>
+      </div>
     </header>
 
     <!-- App Cards List -->
@@ -71,18 +96,24 @@
               <p class="text-xs text-slate-400">Coloristas, estilistas y salones</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Peluquería & Color', 'https://juancdgo.github.io/peluqueria/', '💇‍♀️')"
+            class="px-2.5 py-1 rounded-xl bg-violet-500/10 hover:bg-violet-500/20 text-violet-300 border border-violet-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/peluqueria/" target="_blank" class="py-2.5 px-3 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/peluqueria/" target="_blank" class="col-span-2 py-2.5 px-3 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App →</span>
           </a>
-          <a href="https://juancdgo.github.io/peluqueria/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-violet-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+          <button onclick="showAppQR('Peluquería & Color', 'https://juancdgo.github.io/peluqueria/', '💇‍♀️')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-violet-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <a href="https://juancdgo.github.io/peluqueria/?booking=true" target="_blank" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-violet-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
             <span>📅 Turnero</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/peluqueria/', 'Peluquería')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
-            <span>📋 Copiar</span>
-          </button>
         </div>
       </div>
 
@@ -98,99 +129,123 @@
               <p class="text-xs text-slate-400">Barberos, cortes fade y barba</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Barbería & Barbershop', 'https://juancdgo.github.io/barberia/', '💈')"
+            class="px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/barberia/" target="_blank" class="py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/barberia/" target="_blank" class="col-span-2 py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App →</span>
           </a>
-          <a href="https://juancdgo.github.io/barberia/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+          <button onclick="showAppQR('Barbería & Barbershop', 'https://juancdgo.github.io/barberia/', '💈')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <a href="https://juancdgo.github.io/barberia/?booking=true" target="_blank" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
             <span>📅 Turnero</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/barberia/', 'Barbería')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
-            <span>📋 Copiar</span>
-          </button>
         </div>
       </div>
 
       <!-- 3. Dentista -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-teal-500/50 space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-cyan-500/50 space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center text-2xl shadow-lg">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 to-teal-400 flex items-center justify-center text-2xl shadow-lg">
               🦷
             </div>
             <div>
-              <h2 class="text-base font-black text-white">Odontología & Dentista</h2>
-              <p class="text-xs text-slate-400">Ortodoncia, profilaxis e implantes</p>
+              <h2 class="text-base font-black text-white">Consultorio Odontológico</h2>
+              <p class="text-xs text-slate-400">Dentistas, ortodoncia y turnos</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Consultorio Odontológico', 'https://juancdgo.github.io/dentista/', '🦷')"
+            class="px-2.5 py-1 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/dentista/" target="_blank" class="py-2.5 px-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/dentista/" target="_blank" class="col-span-2 py-2.5 px-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App →</span>
           </a>
-          <a href="https://juancdgo.github.io/dentista/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+          <button onclick="showAppQR('Consultorio Odontológico', 'https://juancdgo.github.io/dentista/', '🦷')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <a href="https://juancdgo.github.io/dentista/?booking=true" target="_blank" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
             <span>📅 Turnero</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/dentista/', 'Dentista')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
-            <span>📋 Copiar</span>
-          </button>
         </div>
       </div>
 
-      <!-- 4. Manicura -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-rose-500/50 space-y-4">
+      <!-- 4. Manicura & Spa -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-pink-500/50 space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center text-2xl shadow-lg">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-600 to-rose-400 flex items-center justify-center text-2xl shadow-lg">
               💅
             </div>
             <div>
-              <h2 class="text-base font-black text-white">Manicuría & Nails Studio</h2>
-              <p class="text-xs text-slate-400">Semipermanente, kapping y esculpidas</p>
+              <h2 class="text-base font-black text-white">Manicura & Lash Spa</h2>
+              <p class="text-xs text-slate-400">Uñas, cejas, lifting y belleza</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Manicura & Lash Spa', 'https://juancdgo.github.io/manucura/', '💅')"
+            class="px-2.5 py-1 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/manucura/" target="_blank" class="py-2.5 px-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/manucura/" target="_blank" class="col-span-2 py-2.5 px-3 bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App →</span>
           </a>
-          <a href="https://juancdgo.github.io/manucura/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-rose-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+          <button onclick="showAppQR('Manicura & Lash Spa', 'https://juancdgo.github.io/manucura/', '💅')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-pink-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <a href="https://juancdgo.github.io/manucura/?booking=true" target="_blank" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-pink-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
             <span>📅 Turnero</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/manucura/', 'Manicura')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
-            <span>📋 Copiar</span>
-          </button>
         </div>
       </div>
 
       <!-- 5. Peluquería Canina -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-amber-400/50 space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-amber-500/50 space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-2xl shadow-lg">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-400 flex items-center justify-center text-2xl shadow-lg">
               🐶
             </div>
             <div>
-              <h2 class="text-base font-black text-white">Peluquería Canina & Grooming</h2>
-              <p class="text-xs text-slate-400">Baño, corte y cuidado de pichichos</p>
+              <h2 class="text-base font-black text-white">Peluquería Canina & Spa</h2>
+              <p class="text-xs text-slate-400">Baño, corte por raza y mascotas</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Peluquería Canina', 'https://juancdgo.github.io/peluqueria-canina/', '🐶')"
+            class="px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/peluqueria-canina/" target="_blank" class="py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/peluqueria-canina/" target="_blank" class="col-span-2 py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App →</span>
           </a>
-          <a href="https://juancdgo.github.io/peluqueria-canina/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+          <button onclick="showAppQR('Peluquería Canina', 'https://juancdgo.github.io/peluqueria-canina/', '🐶')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <a href="https://juancdgo.github.io/peluqueria-canina/?booking=true" target="_blank" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
             <span>📅 Turnero</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/peluqueria-canina/', 'Peluquería Canina')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
-            <span>📋 Copiar</span>
-          </button>
         </div>
       </div>
 
@@ -206,13 +261,22 @@
               <p class="text-xs text-slate-400">Pizzas, tortas, pastelitos, combos y packaging</p>
             </div>
           </div>
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20">En línea</span>
+          <button 
+            onclick="showAppQR('Costos · Cocina & Comida', 'https://juancdgo.github.io/costos-comida/', '🍳')"
+            class="px-2.5 py-1 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Ver código QR para escanear"
+          >
+            <span>📷 QR</span>
+          </button>
         </div>
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
-          <a href="https://juancdgo.github.io/costos-comida/" target="_blank" class="py-2.5 px-3 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center col-span-2">
+        <div class="grid grid-cols-4 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/costos-comida/" target="_blank" class="col-span-2 py-2.5 px-3 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
             <span>Abrir App de Costos →</span>
           </a>
-          <button onclick="copyLink('https://juancdgo.github.io/costos-comida/', 'Costos Comida')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+          <button onclick="showAppQR('Costos · Cocina & Comida', 'https://juancdgo.github.io/costos-comida/', '🍳')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-orange-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📷 QR</span>
+          </button>
+          <button onclick="copyLink('https://juancdgo.github.io/costos-comida/', 'Costos Comida')" class="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
             <span>📋 Copiar</span>
           </button>
         </div>
@@ -238,6 +302,68 @@
 
   </div>
 
+  <!-- ========================================== -->
+  <!-- MODAL: CÓDIGO QR PARA ESCANEAR CON EL CELU -->
+  <!-- ========================================== -->
+  <div id="qrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl space-y-4 animate-in fade-in zoom-in duration-200">
+      
+      <!-- Encabezado del Modal -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2 text-left">
+          <span id="qrModalIcon" class="text-2xl">📱</span>
+          <div>
+            <h3 id="qrModalTitle" class="text-sm font-black text-white truncate max-w-[200px]">App</h3>
+            <p class="text-[11px] text-indigo-400 font-bold">Escaneá con tu cámara</p>
+          </div>
+        </div>
+        <button onclick="closeAppQR()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm flex items-center justify-center transition-all">
+          ✕
+        </button>
+      </div>
+
+      <!-- Contenedor Blanco del Código QR -->
+      <div class="flex flex-col items-center justify-center py-2">
+        <div class="bg-white p-4 rounded-3xl shadow-xl border-4 border-slate-800 inline-block">
+          <div id="qrCodeContainer" class="w-[200px] h-[200px] flex items-center justify-center">
+            <!-- Canvas QR generado dinámicamente -->
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 font-medium mt-3 max-w-[260px] leading-relaxed">
+          Apuntale con la cámara de cualquier teléfono (Android o iPhone). Abre al instante sin instalar nada.
+        </p>
+      </div>
+
+      <!-- Dirección URL y botón de copiar -->
+      <div class="bg-slate-950 p-2.5 rounded-2xl border border-slate-800 flex items-center justify-between gap-2 text-left">
+        <span id="qrModalUrlText" class="text-[11px] font-mono text-slate-400 truncate flex-1">https://...</span>
+        <button 
+          onclick="copyCurrentQRLink()" 
+          class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl shrink-0 active:scale-95 transition-all"
+        >
+          Copiar
+        </button>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <button 
+          onclick="closeAppQR()" 
+          class="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl active:scale-95 transition-all"
+        >
+          Cerrar
+        </button>
+        <button 
+          onclick="openCurrentQRLink()" 
+          class="py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg active:scale-95 transition-all"
+        >
+          Abrir App ↗
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white text-slate-900 px-4 py-2.5 rounded-2xl text-xs font-black shadow-2xl transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none flex items-center gap-2">
     <span>✨</span>
@@ -245,6 +371,52 @@
   </div>
 
   <script>
+    let currentQrInstance = null;
+
+    function showAppQR(name, url, icon = '📱') {
+      document.getElementById('qrModalTitle').textContent = name;
+      document.getElementById('qrModalIcon').textContent = icon;
+      document.getElementById('qrModalUrlText').textContent = url;
+      
+      const container = document.getElementById('qrCodeContainer');
+      container.innerHTML = '';
+      
+      try {
+        if (typeof QRCode !== 'undefined') {
+          currentQrInstance = new QRCode(container, {
+            text: url,
+            width: 200,
+            height: 200,
+            colorDark: '#0F172A',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        } else {
+          container.innerHTML = `<img src="https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=200" alt="QR" class="w-48 h-48 rounded-xl">`;
+        }
+      } catch (err) {
+        console.error('Error generating QR:', err);
+        container.innerHTML = `<img src="https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=200" alt="QR" class="w-48 h-48 rounded-xl">`;
+      }
+      
+      document.getElementById('qrModal').classList.remove('hidden');
+    }
+
+    function closeAppQR() {
+      document.getElementById('qrModal').classList.add('hidden');
+    }
+
+    function copyCurrentQRLink() {
+      const url = document.getElementById('qrModalUrlText').textContent;
+      const name = document.getElementById('qrModalTitle').textContent;
+      copyLink(url, name);
+    }
+
+    function openCurrentQRLink() {
+      const url = document.getElementById('qrModalUrlText').textContent;
+      window.open(url, '_blank');
+    }
+
     function copyLink(url, appName) {
       navigator.clipboard.writeText(url).then(() => {
         showToast(`¡Link de ${appName} copiado!`);
@@ -262,6 +434,14 @@
         toast.classList.add('opacity-0', 'translate-y-12');
       }, 2500);
     }
+
+    // Cerrar modal al tocar afuera
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('qrModal');
+      if (e.target === modal) {
+        closeAppQR();
+      }
+    });
   </script>
 </body>
 </html>
