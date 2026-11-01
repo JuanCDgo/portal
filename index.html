@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#0F172A">
+  <title>Portal · Mis Mini Apps</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #0F172A;
+      color: #F8FAFC;
+    }
+    .card-glow:hover {
+      box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center items-start sm:py-8 px-4">
+
+  <div class="w-full max-w-lg flex flex-col space-y-6 pb-12">
+    
+    <!-- Header -->
+    <header class="pt-6 text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-indigo-400 mb-1">
+        <span>🚀 Suite de Negocios Independientes</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Mis Mini Apps</h1>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-sm mx-auto">
+        Panel central de accesos directos. Abrí o compartí cualquier app en 1 toque.
+      </p>
+    </header>
+
+    <!-- App Cards List -->
+    <main class="space-y-4" id="appsList">
+      
+      <!-- 1. Peluquería -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-violet-500/50 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center text-2xl shadow-lg">
+              💇‍♀️
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white">Peluquería & Color</h2>
+              <p class="text-xs text-slate-400">Coloristas, estilistas y salones</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20">En línea</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/peluqueria/" target="_blank" class="py-2.5 px-3 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+            <span>Abrir App →</span>
+          </a>
+          <a href="https://juancdgo.github.io/peluqueria/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-violet-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+            <span>📅 Turnero</span>
+          </a>
+          <button onclick="copyLink('https://juancdgo.github.io/peluqueria/', 'Peluquería')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📋 Copiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Barbería -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-amber-500/50 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-2xl shadow-lg">
+              💈
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white">Barbería & Barbershop</h2>
+              <p class="text-xs text-slate-400">Barberos, cortes fade y barba</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">En línea</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/barberia/" target="_blank" class="py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+            <span>Abrir App →</span>
+          </a>
+          <a href="https://juancdgo.github.io/barberia/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+            <span>📅 Turnero</span>
+          </a>
+          <button onclick="copyLink('https://juancdgo.github.io/barberia/', 'Barbería')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📋 Copiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Dentista -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-teal-500/50 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center text-2xl shadow-lg">
+              🦷
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white">Odontología & Dentista</h2>
+              <p class="text-xs text-slate-400">Ortodoncia, profilaxis e implantes</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">En línea</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/dentista/" target="_blank" class="py-2.5 px-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+            <span>Abrir App →</span>
+          </a>
+          <a href="https://juancdgo.github.io/dentista/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+            <span>📅 Turnero</span>
+          </a>
+          <button onclick="copyLink('https://juancdgo.github.io/dentista/', 'Dentista')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📋 Copiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Manicura -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-rose-500/50 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center text-2xl shadow-lg">
+              💅
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white">Manicuría & Nails Studio</h2>
+              <p class="text-xs text-slate-400">Semipermanente, kapping y esculpidas</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">En línea</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/manucura/" target="_blank" class="py-2.5 px-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+            <span>Abrir App →</span>
+          </a>
+          <a href="https://juancdgo.github.io/manucura/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-rose-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+            <span>📅 Turnero</span>
+          </a>
+          <button onclick="copyLink('https://juancdgo.github.io/manucura/', 'Manicura')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📋 Copiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. Peluquería Canina -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 card-glow transition-all hover:border-amber-400/50 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-2xl shadow-lg">
+              🐶
+            </div>
+            <div>
+              <h2 class="text-base font-black text-white">Peluquería Canina & Grooming</h2>
+              <p class="text-xs text-slate-400">Baño, corte y cuidado de pichichos</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">En línea</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+          <a href="https://juancdgo.github.io/peluqueria-canina/" target="_blank" class="py-2.5 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all text-center">
+            <span>Abrir App →</span>
+          </a>
+          <a href="https://juancdgo.github.io/peluqueria-canina/?booking=true" target="_blank" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all text-center">
+            <span>📅 Turnero</span>
+          </a>
+          <button onclick="copyLink('https://juancdgo.github.io/peluqueria-canina/', 'Peluquería Canina')" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>📋 Copiar</span>
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Enlaces Directos Útiles -->
+    <footer class="pt-4 space-y-3 text-center">
+      <div class="flex items-center justify-center gap-3 text-xs text-slate-400">
+        <a href="https://drive.google.com/drive/folders/1a3Md1lIrHjRvoO7RINSGyJ3KxfJUsFeF" target="_blank" class="hover:text-white underline inline-flex items-center gap-1">
+          <span>📁 Carpeta Mini Apps en Google Drive</span>
+        </a>
+        <span>•</span>
+        <a href="https://github.com/JuanCDgo" target="_blank" class="hover:text-white underline inline-flex items-center gap-1">
+          <span>🐙 Tu GitHub</span>
+        </a>
+      </div>
+      <p class="text-[11px] text-slate-500">
+        💡 Tip: Agregá esta pantalla a tu inicio para tener acceso a todas las apps sin mandar links.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white text-slate-900 px-4 py-2.5 rounded-2xl text-xs font-black shadow-2xl transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none flex items-center gap-2">
+    <span>✨</span>
+    <span id="toastMsg">Link copiado al portapapeles</span>
+  </div>
+
+  <script>
+    function copyLink(url, appName) {
+      navigator.clipboard.writeText(url).then(() => {
+        showToast(`¡Link de ${appName} copiado!`);
+      }).catch(() => {
+        showToast('Link listo para pegar');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-12');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-12');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
