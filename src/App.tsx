@@ -329,7 +329,7 @@ export function App() {
                   Hub Operativo
                 </h1>
                 <span className="hidden rounded-md border border-[#262E3D] bg-[#141820] px-1.5 py-0.5 font-mono text-[10px] font-medium text-[#9CA3AF] sm:inline-block">
-                  v2.0
+                  v2.1
                 </span>
               </div>
               <p className="truncate text-xs text-[#9CA3AF]">
@@ -396,8 +396,7 @@ export function App() {
 
       <main className="mx-auto max-w-7xl space-y-5 px-4 pt-5 sm:px-6">
         {/* Install Strip */}
-        <section
-          aria-label="Instalación del portal como aplicación"
+        <div
           className="flex flex-col gap-3 rounded-2xl border border-[#232A36] bg-[#141820] p-4 sm:flex-row sm:items-center sm:justify-between"
         >
           <div className="flex items-start gap-3 sm:items-center">
@@ -442,10 +441,10 @@ export function App() {
               <span>Descargar / Guía</span>
             </button>
           </div>
-        </section>
+        </div>
 
         {/* Search & Filters */}
-        <section aria-label="Buscador y categorías" className="space-y-3">
+        <div className="space-y-3">
           <div className="flex flex-col gap-3">
             <div className="relative w-full lg:max-w-md">
               <Search
@@ -496,7 +495,7 @@ export function App() {
               })}
             </div>
           </div>
-        </section>
+        </div>
 
         {/* Bento App Sections */}
         {filteredApps.length > 0 ? (
@@ -504,7 +503,6 @@ export function App() {
             <div className="space-y-8">
               {facilApps.length > 0 && (
                 <section
-                  aria-label="Sistema Fácil — Apps Principales Firebase"
                   className="space-y-3 rounded-2xl border border-emerald-500/25 bg-emerald-950/10 p-4 sm:p-5"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-500/20 pb-3">
@@ -530,7 +528,6 @@ export function App() {
 
               {legacyApps.length > 0 && (
                 <section
-                  aria-label="Otras Apps y Proyectos Anteriores"
                   className="space-y-3 pt-1"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1E2430] pb-2.5">
@@ -555,11 +552,11 @@ export function App() {
               )}
             </div>
           ) : (
-            <section
-              aria-label="Catálogo de sistemas disponibles"
-              className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {filteredApps.map(renderAppCard)}
+            <section className="space-y-3">
+              <h2 className="sr-only">Catálogo de sistemas filtrados</h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {filteredApps.map(renderAppCard)}
+              </div>
             </section>
           )
         ) : (

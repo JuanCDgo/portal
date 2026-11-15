@@ -61,9 +61,9 @@ export function AppCard({
               <AppIcon icon={app.icon} className="h-5 w-5" />
             </div>
             <div className="min-w-0">
-              <h2 className="truncate text-sm font-semibold text-[#F3F4F6]">
+              <h3 className="truncate text-sm font-semibold text-[#F3F4F6]">
                 {app.name}
-              </h2>
+              </h3>
               <p className="truncate font-mono text-[11px] text-[#8B95A7]">
                 {app.domainLabel}
               </p>
