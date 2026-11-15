@@ -40,6 +40,7 @@ export interface AppEntry {
   domainLabel: string;
   description: string;
   category: PlatformCategory;
+  suite?: 'facil' | 'legacy';
   badge: string;
   tagLabel: string;
   icon: IconKey;

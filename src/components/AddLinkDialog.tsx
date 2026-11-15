@@ -50,7 +50,8 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
       description:
         description.trim() || 'Acceso directo agregado manualmente al Hub Operativo.',
       category,
-      badge: badgeMap[category],
+      suite: category === 'cloud' ? 'facil' : 'legacy',
+      badge: category === 'cloud' ? 'Sistema Fácil' : badgeMap[category],
       tagLabel: tagLabel.trim() || 'Personalizado',
       icon: 'link',
       highlight: 'emerald',
@@ -122,7 +123,7 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
               onChange={(e) => setCategory(e.target.value as PlatformCategory)}
               className="mt-1.5 w-full rounded-xl border border-[#262E3D] bg-[#0C0F14] px-3 py-2 text-xs text-[#F3F4F6] focus:border-emerald-500 focus:outline-none"
             >
-              <option value="cloud">Cloud / Firebase</option>
+              <option value="cloud">Sistema Fácil (Firebase)</option>
               <option value="netlify">Netlify</option>
               <option value="desktop">SGU / Local LAN</option>
               <option value="miniapps">Mini Apps Web</option>

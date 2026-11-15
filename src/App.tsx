@@ -34,9 +34,9 @@ export function App() {
   const [pinnedIds, setPinnedIds] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_PINNED_KEY);
-      return saved ? (JSON.parse(saved) as string[]) : ['maldito-flanders', 'bebidas-facil', 'kiosco-facil', 'sistema-sgu'];
+      return saved ? (JSON.parse(saved) as string[]) : ['kiosco-facil', 'maldito-flanders', 'bebidas-facil'];
     } catch {
-      return ['maldito-flanders', 'bebidas-facil', 'kiosco-facil', 'sistema-sgu'];
+      return ['kiosco-facil', 'maldito-flanders', 'bebidas-facil'];
     }
   });
   const [customApps, setCustomApps] = useState<AppEntry[]>(() => {
@@ -133,7 +133,7 @@ export function App() {
     return {
       all: allApps.length,
       pinned: allApps.filter((a) => pinnedIds.includes(a.id)).length,
-      cloud: allApps.filter((a) => a.category === 'cloud').length,
+      cloud: allApps.filter((a) => a.suite === 'facil' || a.category === 'cloud').length,
       netlify: allApps.filter((a) => a.category === 'netlify').length,
       desktop: allApps.filter((a) => a.category === 'desktop').length,
       miniapps: allApps.filter((a) => a.category === 'miniapps').length,
@@ -141,13 +141,27 @@ export function App() {
     };
   }, [allApps, pinnedIds]);
 
+  const sortWithPinned = useCallback(
+    (items: AppEntry[]) =>
+      [...items].sort((a, b) => {
+        const aPin = pinnedIds.includes(a.id) ? 0 : 1;
+        const bPin = pinnedIds.includes(b.id) ? 0 : 1;
+        return aPin - bPin;
+      }),
+    [pinnedIds],
+  );
+
   const filteredApps = useMemo(() => {
     const q = search.trim().toLowerCase();
     const list = allApps.filter((app) => {
       if (category === 'pinned' && !pinnedIds.includes(app.id)) return false;
+      if (category === 'cloud' && app.suite !== 'facil' && app.category !== 'cloud') {
+        return false;
+      }
       if (
         category !== 'all' &&
         category !== 'pinned' &&
+        category !== 'cloud' &&
         app.category !== category
       ) {
         return false;
@@ -162,16 +176,39 @@ export function App() {
       );
     });
 
-    // Put pinned items first when viewing 'all'
-    if (category === 'all') {
-      return [...list].sort((a, b) => {
-        const aPin = pinnedIds.includes(a.id) ? 0 : 1;
-        const bPin = pinnedIds.includes(b.id) ? 0 : 1;
-        return aPin - bPin;
-      });
-    }
-    return list;
-  }, [allApps, category, pinnedIds, search]);
+    return category === 'all' ? sortWithPinned(list) : list;
+  }, [allApps, category, pinnedIds, search, sortWithPinned]);
+
+  const facilApps = useMemo(
+    () => sortWithPinned(filteredApps.filter((a) => a.suite === 'facil' || a.category === 'cloud')),
+    [filteredApps, sortWithPinned],
+  );
+
+  const legacyApps = useMemo(
+    () => sortWithPinned(filteredApps.filter((a) => a.suite !== 'facil' && a.category !== 'cloud')),
+    [filteredApps, sortWithPinned],
+  );
+
+  const useSplitSections = category === 'all' || category === 'pinned';
+
+  const renderAppCard = (app: AppEntry) => (
+    <AppCard
+      key={app.id}
+      app={app}
+      isPinned={pinnedIds.includes(app.id)}
+      isCopied={copiedId === app.id}
+      onTogglePin={togglePin}
+      onOpenQr={(item) =>
+        setQrTarget({
+          name: item.name,
+          url: item.url,
+          subtitle: `${item.badge} · ${item.tagLabel}`,
+        })
+      }
+      onCopy={handleCopy}
+      onDeleteCustom={app.isCustom ? handleDeleteCustomApp : undefined}
+    />
+  );
 
   const handleTriggerNativeInstall = async () => {
     if (!deferredPrompt) {
@@ -270,10 +307,10 @@ export function App() {
   const filterTabs: { id: CategoryFilter; label: string; count: number }[] = [
     { id: 'all', label: 'Todos', count: counts.all },
     { id: 'pinned', label: 'Fijados', count: counts.pinned },
-    { id: 'cloud', label: 'Cloud & Firebase', count: counts.cloud },
+    { id: 'cloud', label: 'Sistema Fácil', count: counts.cloud },
     { id: 'netlify', label: 'Netlify', count: counts.netlify },
-    { id: 'desktop', label: 'Sistemas SGU & Local', count: counts.desktop },
-    { id: 'miniapps', label: 'Mini Apps Web', count: counts.miniapps },
+    { id: 'desktop', label: 'SGU & Local', count: counts.desktop },
+    { id: 'miniapps', label: 'Mini Apps v1', count: counts.miniapps },
     { id: 'resources', label: 'Recursos', count: counts.resources },
   ];
 
@@ -409,8 +446,8 @@ export function App() {
 
         {/* Search & Filters */}
         <section aria-label="Buscador y categorías" className="space-y-3">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div className="relative w-full lg:max-w-sm">
+          <div className="flex flex-col gap-3">
+            <div className="relative w-full lg:max-w-md">
               <Search
                 className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-[#6B7280]"
                 aria-hidden="true"
@@ -429,7 +466,7 @@ export function App() {
               </span>
             </div>
 
-            <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0">
+            <div className="flex flex-wrap items-center gap-2">
               {filterTabs.map((tab) => {
                 const active = category === tab.id;
                 return (
@@ -461,31 +498,70 @@ export function App() {
           </div>
         </section>
 
-        {/* Bento App Grid */}
+        {/* Bento App Sections */}
         {filteredApps.length > 0 ? (
-          <section
-            aria-label="Catálogo de sistemas disponibles"
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {filteredApps.map((app) => (
-              <AppCard
-                key={app.id}
-                app={app}
-                isPinned={pinnedIds.includes(app.id)}
-                isCopied={copiedId === app.id}
-                onTogglePin={togglePin}
-                onOpenQr={(item) =>
-                  setQrTarget({
-                    name: item.name,
-                    url: item.url,
-                    subtitle: `${item.badge} · ${item.tagLabel}`,
-                  })
-                }
-                onCopy={handleCopy}
-                onDeleteCustom={app.isCustom ? handleDeleteCustomApp : undefined}
-              />
-            ))}
-          </section>
+          useSplitSections ? (
+            <div className="space-y-8">
+              {facilApps.length > 0 && (
+                <section
+                  aria-label="Sistema Fácil — Apps Principales Firebase"
+                  className="space-y-3 rounded-2xl border border-emerald-500/25 bg-emerald-950/10 p-4 sm:p-5"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-500/20 pb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-sm font-bold tracking-tight text-white sm:text-base">
+                          Sistema Fácil · Suite Oficial
+                        </h2>
+                        <span className="rounded-md border border-emerald-500/35 bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-300">
+                          Estándar KioscoFácil ({facilApps.length})
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-[#9CA3AF]">
+                        Apps móviles en la nube (Firebase + Offline + Caja diaria + Roles Dueño/Vendedor).
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {facilApps.map(renderAppCard)}
+                  </div>
+                </section>
+              )}
+
+              {legacyApps.length > 0 && (
+                <section
+                  aria-label="Otras Apps y Proyectos Anteriores"
+                  className="space-y-3 pt-1"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1E2430] pb-2.5">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-sm font-semibold text-[#E5E7EB] sm:text-base">
+                          Otras Apps y Proyectos Anteriores
+                        </h2>
+                        <span className="rounded-md border border-[#262E3D] bg-[#141820] px-2 py-0.5 font-mono text-[10px] font-medium text-[#9CA3AF]">
+                          {legacyApps.length}
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-[#8B95A7]">
+                        Sistemas SGU (.NET/LAN), Netlify, Mini Apps estáticas v1 y repositorios históricos.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {legacyApps.map(renderAppCard)}
+                  </div>
+                </section>
+              )}
+            </div>
+          ) : (
+            <section
+              aria-label="Catálogo de sistemas disponibles"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+            >
+              {filteredApps.map(renderAppCard)}
+            </section>
+          )
         ) : (
           <div className="rounded-2xl border border-[#232A36] bg-[#141820] px-6 py-12 text-center">
             <p className="text-sm font-semibold text-[#E5E7EB]">

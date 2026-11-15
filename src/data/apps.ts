@@ -3,16 +3,31 @@ import type { AppEntry } from '../types';
 export const PORTAL_URL = 'https://juancdgo.github.io/portal/';
 
 export const INITIAL_APPS: AppEntry[] = [
-  // --- CLOUD & FIREBASE (Principal) ---
+  // --- SISTEMA FÁCIL (ESTÁNDAR FIREBASE OFICIAL · BANDERA KIOSCOFÁCIL) ---
+  {
+    id: 'kiosco-facil',
+    name: 'KioscoFácil',
+    url: 'https://kiosco-facil-ar.web.app',
+    domainLabel: 'kiosco-facil-ar.web.app',
+    description:
+      'App bandera y estándar oficial del sistema Fácil: POS rápido offline, stock, escáner, caja y roles.',
+    category: 'cloud',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
+    tagLabel: 'Bandera · Estándar',
+    icon: 'store',
+    highlight: 'emerald',
+  },
   {
     id: 'maldito-flanders',
     name: 'Maldito Flanders',
     url: 'https://maldito-flanders-ar.web.app',
     domainLabel: 'maldito-flanders-ar.web.app',
     description:
-      'Catálogo completo de bebidas, pedidos rápidos y gestión de repartos en tiempo real.',
+      'Catálogo completo de bebidas, promos, pedidos rápidos y gestión de repartos en tiempo real.',
     category: 'cloud',
-    badge: 'Firebase',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
     tagLabel: 'Bebidas y Repartos',
     icon: 'beer',
     highlight: 'emerald',
@@ -27,24 +42,12 @@ export const INITIAL_APPS: AppEntry[] = [
     url: 'https://bebidas-facil-ar.web.app',
     domainLabel: 'bebidas-facil-ar.web.app',
     description:
-      'Mostrador express de bebidas con buscador instantáneo, carga rápida y cierre operativo.',
+      'Mostrador express de bebidas con buscador instantáneo, combos, escala por cantidad y cierre diario.',
     category: 'cloud',
-    badge: 'Firebase',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
     tagLabel: 'Mostrador Express',
     icon: 'basket',
-    highlight: 'emerald',
-  },
-  {
-    id: 'kiosco-facil',
-    name: 'KioscoFácil',
-    url: 'https://kiosco-facil-ar.web.app',
-    domainLabel: 'kiosco-facil-ar.web.app',
-    description:
-      'Punto de venta POS ágil para kiosco y almacén con control diario de mostrador y stock.',
-    category: 'cloud',
-    badge: 'Firebase',
-    tagLabel: 'POS Kiosco',
-    icon: 'store',
     highlight: 'emerald',
   },
 
