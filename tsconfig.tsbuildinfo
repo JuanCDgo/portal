@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/addlinkdialog.tsx","./src/components/appcard.tsx","./src/components/appicon.tsx","./src/components/installdialog.tsx","./src/components/portaldialog.tsx","./src/components/qrdialog.tsx","./src/data/apps.ts"],"version":"5.8.3"}

@@ -1,23 +1,45 @@
-# 🌐 Manual de Usuario · Portal Central de Mini Apps
+# Manual de Usuario — Hub Operativo (Portal JuanCDgo)
 
-El **Portal Central** (`https://juancdgo.github.io/portal/`) reúne en una sola pantalla las **12 Mini Apps** de tu suite, con sus accesos directos, generadores de código QR y manuales de usuario y técnicos.
+Centro unificado de accesos para abrir, compartir por código QR o WhatsApp e instalar en el celular o computadora todos los sistemas, puntos de venta y mini aplicaciones de **JuanCDgo**.
+
+URL oficial: https://juancdgo.github.io/portal/
 
 ---
 
-## 🚀 1. Cómo usar el Portal
+## 1. Cómo instalar el Portal en tu celular o PC
 
-1. **Vista en Cuadrícula (Grid Responsive):**
-   - **En computadora de escritorio:** Las 12 aplicaciones se muestran ordenadas en **3 columnas** una al lado de la otra para ver toda la suite sin hacer scroll innecesario.
-   - **En tablets / notebooks chicas:** Se acomodan en **2 columnas**.
-   - **En celulares:** Se muestran en **1 columna** cómoda para usar con una mano.
+### En Android (Chrome o Edge)
+1. Abrí `https://juancdgo.github.io/portal/`.
+2. Tocá el botón verde **Instalar en PC / Celular** (o **Instalar**) en la barra superior o en el aviso principal.
+3. Confirmá **Instalar aplicación** cuando aparezca el cartel del navegador.
+4. Si no ves el cartel automático, tocá el menú de los tres puntos arriba a la derecha y elegí **Instalar aplicación**.
 
-2. **Buscador Instantáneo (`🔍 Buscar app o rubro...`):**
-   - Escribí arriba cualquier palabra clave (ej. `bebidas`, `barbería`, `turnero`, `fábrica`, `motos`) y el portal filtra las tarjetas en tiempo real.
+### En iPhone o iPad (Safari)
+1. Abrí `https://juancdgo.github.io/portal/` en Safari.
+2. Tocá el botón **Compartir** (cuadrado con flecha hacia arriba) en la barra inferior.
+3. Seleccioná **Agregar a inicio** y confirmá con **Agregar**.
 
-3. **Botones de cada Mini App:**
-   - **Abrir App →**: Abre la aplicación web lista para usar en una pestaña nueva.
-   - **📷 QR**: Abre en pantalla un código QR grande y nítido para que cualquier cliente o dueño lo escanee con la cámara de su celular.
-   - **📅 Turnero / 📋 Copiar / 🔐 Dueño**: Acceso rápido a la vista específica o copia del enlace al portapapeles en 1 toque.
+### En PC o Notebook (Windows, Mac o Linux)
+- **Como Aplicación (PWA):** en Chrome o Edge, hacé clic en el botón **Instalar en PC / Celular** o en el ícono de instalación ubicado a la derecha de la barra de direcciones. Queda como una ventana propia y con acceso en el Escritorio / Menú Inicio.
+- **Acceso directo `.url` (Windows):** abrí el botón **Descargar / Guía** y presioná **Descargar Acceso PC (.url)** para guardar un acceso directo instantáneo.
 
-4. **Manuales debajo de cada App (`📘 Manual Usuario` y `🛠️ Manual Técnico`):**
-   - Debajo de cada tarjeta tenés los dos botones directos que abren el **Manual de Usuario** (para entregarle al dueño del comercio) y el **Manual Técnico** (arquitectura, almacenamiento y mantenimiento para vos) directamente formateados en GitHub.
+---
+
+## 2. Funciones principales del Portal
+
+- **Buscador rápido (`Ctrl + K`):** filtrá al instante por nombre de sistema, rubro, tecnología (`Firebase`, `Netlify`, `.NET`, `GitHub Pages`) o dominio.
+- **Filtros por plataforma:**
+  - `Todos`: listado completo ordenado con tus fijados arriba.
+  - `Fijados`: tus sistemas de uso diario marcados con el ícono de pin.
+  - `Cloud & Firebase`: **Maldito Flanders**, **BebidasFácil** y **KioscoFácil**.
+  - `Netlify`: **Stock para Negocios**, **Peluquería 2026** y **Rotisería v1**.
+  - `Sistemas SGU & Local`: **Sistema SGU (.NET 10 / LAN)**, **Control Calidad Fábrica** y **Pizzas Martina**.
+  - `Mini Apps Web`: suite de 15 mini apps en GitHub Pages (`Lavadero`, `Barbería`, `Peluquería`, `Dentista`, `Gomería`, `Rotisería`, `Costos Comida`, `Fidelización`, etc.).
+  - `Recursos`: carpeta de Google Drive y repositorios GitHub.
+- **Acciones por tarjeta:**
+  - **Abrir App:** abre el sistema en una nueva pestaña.
+  - **QR:** genera un código QR local listo para escanear desde otro teléfono, copiar el link o enviarlo por WhatsApp.
+  - **Copiar:** copia la URL al portapapeles.
+  - **Accesos secundarios:** botones directos a `Turnero`, `Dueño`, `Versión Clásica`, `Local :5000`, `Manual` y `Técnico` según corresponda.
+- **Agregar enlaces personalizados:** botón **Agregar Enlace** para guardar direcciones de red local (ej. `http://192.168.1.50:5000`) o nuevos proyectos web en tu dispositivo.
+- **Respaldo JSON (Exportar / Importar):** descargá una copia en archivo `.json` con tus enlaces personalizados y favoritos fijados, o restaurala en otro dispositivo.
