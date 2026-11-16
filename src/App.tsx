@@ -329,7 +329,7 @@ export function App() {
                   Hub Operativo
                 </h1>
                 <span className="hidden rounded-md border border-[#262E3D] bg-[#141820] px-1.5 py-0.5 font-mono text-[10px] font-medium text-[#9CA3AF] sm:inline-block">
-                  v2.1
+                  v2.2
                 </span>
               </div>
               <p className="truncate text-xs text-[#9CA3AF]">

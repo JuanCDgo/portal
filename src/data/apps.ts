@@ -50,6 +50,24 @@ export const INITIAL_APPS: AppEntry[] = [
     icon: 'basket',
     highlight: 'emerald',
   },
+  {
+    id: 'lavadero-facil',
+    name: 'LavaderoFácil',
+    url: 'https://lavadero-facil-ar.web.app',
+    domainLabel: 'lavadero-facil-ar.web.app',
+    description:
+      'Boxes de lavado, agenda por horarios, fichas con sellos, avisos WhatsApp y caja diaria offline.',
+    category: 'cloud',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
+    tagLabel: 'Boxes y Turnos',
+    icon: 'car',
+    highlight: 'emerald',
+    secondaryAction: {
+      label: 'Versión Clásica',
+      url: 'https://juancdgo.github.io/lavadero/',
+    },
+  },
 
   // --- NETLIFY ---
   {
