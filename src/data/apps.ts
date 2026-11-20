@@ -68,6 +68,20 @@ export const INITIAL_APPS: AppEntry[] = [
       url: 'https://juancdgo.github.io/lavadero/',
     },
   },
+  {
+    id: 'catalogo-facil',
+    name: 'CatálogoFácil',
+    url: 'https://catalogo-facil-ar.web.app',
+    domainLabel: 'catalogo-facil-ar.web.app',
+    description:
+      'Vitrina web Vice Sunset (Día/Noche) con Placa Story IG/TikTok 9:16 + QR, variantes y pedidos WhatsApp.',
+    category: 'cloud',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
+    tagLabel: 'Vitrina & Story IG',
+    icon: 'sparkles',
+    highlight: 'emerald',
+  },
 
   // --- NETLIFY ---
   {
