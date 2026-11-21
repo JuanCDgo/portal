@@ -82,6 +82,20 @@ export const INITIAL_APPS: AppEntry[] = [
     icon: 'sparkles',
     highlight: 'emerald',
   },
+  {
+    id: 'superpos-pyme',
+    name: 'SuperPOS PyME',
+    url: 'https://superpos-pyme-ar.web.app',
+    domainLabel: 'superpos-pyme-ar.web.app',
+    description:
+      'POS + ERP + CRM PyME Argentina (Modo Día/Noche) con nube Firebase, QR Alias/Mercado Pago, fiado, stock y WhatsApp.',
+    category: 'cloud',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
+    tagLabel: 'POS + ERP + CRM',
+    icon: 'store',
+    highlight: 'emerald',
+  },
 
   // --- NETLIFY ---
   {
