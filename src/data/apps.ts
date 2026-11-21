@@ -96,6 +96,22 @@ export const INITIAL_APPS: AppEntry[] = [
     icon: 'store',
     highlight: 'emerald',
   },
+  {
+    id: 'placa-facil',
+    name: 'PlacaFácil',
+    url: 'https://juancdgo.github.io/placa-facil/',
+    domainLabel: 'juancdgo.github.io/placa-facil',
+    description:
+      'Cartelería comercial y placas 9:16, 4:5 y Góndola A4 PDF (Oferta, Lista de Precios, QR Alias, Horarios) 100% offline y sin marca de agua.',
+    category: 'miniapps',
+    suite: 'facil',
+    badge: 'Sistema Fácil',
+    tagLabel: 'Placas & A4 PDF',
+    icon: 'sparkles',
+    highlight: 'emerald',
+    manualUserUrl: 'https://github.com/JuanCDgo/placa-facil/blob/main/MANUAL_USUARIO.md',
+    manualTechUrl: 'https://github.com/JuanCDgo/placa-facil/blob/main/MANUAL_TECNICO.md',
+  },
 
   // --- NETLIFY ---
   {
