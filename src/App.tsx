@@ -497,7 +497,7 @@ export function App() {
                     <span>{tab.label}</span>
                     <span
                       className={`font-mono text-[10px] ${
-                        active ? 'text-emerald-300' : 'text-[#6B7280]'
+                        active ? 'text-emerald-300' : 'text-[#9CA3AF]'
                       }`}
                     >
                       ({tab.count})

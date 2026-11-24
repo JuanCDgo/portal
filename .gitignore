@@ -4,3 +4,5 @@ dist-ssr
 *.local
 .env
 .env.*
+qa-torture/artifacts/
+test-results/
