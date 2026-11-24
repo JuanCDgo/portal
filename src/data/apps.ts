@@ -113,6 +113,99 @@ export const INITIAL_APPS: AppEntry[] = [
     manualTechUrl: 'https://github.com/JuanCDgo/placa-facil/blob/main/MANUAL_TECNICO.md',
   },
 
+  // --- APPS LABORALES (FÁBRICA, CALIDAD & MEJORA CONTINUA) ---
+  {
+    id: 'kaizen-pareto',
+    name: 'KaizenPareto',
+    url: 'https://kaizenpareto.kaizen-jm.workers.dev',
+    domainLabel: 'kaizenpareto.kaizen-jm.workers.dev',
+    description:
+      'Análisis Pareto 80/20, Espina de Pescado (Ishikawa 6M/4P), Plan Kaizen y exportación PNG, PDF y PowerPoint.',
+    category: 'work',
+    badge: 'Laboral · Cloud',
+    tagLabel: 'Pareto & Ishikawa',
+    icon: 'chart',
+    highlight: 'amber',
+    secondaryAction: {
+      label: 'Repo GitHub',
+      url: 'https://github.com/JuanCDgo/pareto-kaizen',
+    },
+    manualUserUrl: 'https://github.com/JuanCDgo/pareto-kaizen/blob/main/MANUAL_USUARIO.md',
+    manualTechUrl: 'https://github.com/JuanCDgo/pareto-kaizen/blob/main/MANUAL_TECNICO.md',
+  },
+  {
+    id: 'caminata-gemba',
+    name: 'Caminata Gemba',
+    url: 'https://juancdgo.github.io/caminata-gemba/',
+    domainLabel: 'juancdgo.github.io/caminata-gemba',
+    description:
+      'Automatizador offline de recorridas Gemba en planta con registro fotográfico de hallazgos y exportación PowerPoint (.pptx).',
+    category: 'work',
+    badge: 'Laboral · Offline',
+    tagLabel: 'Recorrida Gemba',
+    icon: 'factory',
+    highlight: 'amber',
+    secondaryAction: {
+      label: 'Local :5150',
+      url: 'http://127.0.0.1:5150',
+    },
+    extraAction: {
+      label: 'Repo GitHub',
+      url: 'https://github.com/JuanCDgo/caminata-gemba',
+    },
+  },
+  {
+    id: 'control-calidad-fabrica',
+    name: 'Control Calidad Fábrica',
+    url: 'https://juancdgo.github.io/calidad/',
+    domainLabel: 'juancdgo.github.io/calidad',
+    description:
+      'Auditoría de planta offline-first con registro fotográfico, análisis Pareto y modo servidor WiFi local.',
+    category: 'work',
+    badge: 'Planta / PWA',
+    tagLabel: 'Calidad Industrial',
+    icon: 'factory',
+    highlight: 'amber',
+    secondaryAction: {
+      label: 'Repo Fábrica',
+      url: 'https://github.com/JuanCDgo/control-calidad-fabrica',
+    },
+    manualUserUrl:
+      'https://github.com/JuanCDgo/calidad/blob/main/MANUAL_USUARIO.md',
+    manualTechUrl:
+      'https://github.com/JuanCDgo/calidad/blob/main/MANUAL_TECNICO.md',
+  },
+  {
+    id: 'control-planta-patria',
+    name: 'Control Planta Patria v1.2',
+    url: 'https://localhost:8000',
+    domainLabel: 'localhost:8000 (Servidor WiFi)',
+    description:
+      'Consolidador semanal de planta, tablero ejecutivo y servidor WiFi local para registro de encargados.',
+    category: 'work',
+    badge: 'Local / WiFi',
+    tagLabel: 'Planta Patria',
+    icon: 'server',
+    highlight: 'amber',
+    secondaryAction: {
+      label: 'Repo Privado',
+      url: 'https://github.com/JuanCDgo/control-planta-patria',
+    },
+  },
+  {
+    id: 'paretos-editables',
+    name: 'Paretos Editables',
+    url: 'https://juancdgo.github.io/paretos-editables/',
+    domainLabel: 'juancdgo.github.io/paretos-editables',
+    description:
+      'Tablero interactivo 80/20 para cargar categorías de fallas o ventas y visualizar Pareto al instante.',
+    category: 'work',
+    badge: 'GitHub Pages',
+    tagLabel: 'Análisis 80/20',
+    icon: 'chart',
+    highlight: 'amber',
+  },
+
   // --- NETLIFY ---
   {
     id: 'stock-negocios',
@@ -175,27 +268,6 @@ export const INITIAL_APPS: AppEntry[] = [
       label: 'Repo .NET',
       url: 'https://github.com/JuanCDgo/sgu-clean-architecture',
     },
-  },
-  {
-    id: 'control-calidad-fabrica',
-    name: 'Control Calidad Fábrica',
-    url: 'https://juancdgo.github.io/calidad/',
-    domainLabel: 'juancdgo.github.io/calidad',
-    description:
-      'Auditoría de planta offline-first con registro fotográfico, análisis Pareto y modo red local.',
-    category: 'desktop',
-    badge: 'Planta / PWA',
-    tagLabel: 'Calidad Industrial',
-    icon: 'factory',
-    highlight: 'amber',
-    secondaryAction: {
-      label: 'Repo Fábrica',
-      url: 'https://github.com/JuanCDgo/control-calidad-fabrica',
-    },
-    manualUserUrl:
-      'https://github.com/JuanCDgo/calidad/blob/main/MANUAL_USUARIO.md',
-    manualTechUrl:
-      'https://github.com/JuanCDgo/calidad/blob/main/MANUAL_TECNICO.md',
   },
   {
     id: 'pizzas-martina',
@@ -447,18 +519,6 @@ export const INITIAL_APPS: AppEntry[] = [
     badge: 'GitHub Pages',
     tagLabel: 'Preventa CRM',
     icon: 'trending',
-  },
-  {
-    id: 'paretos-editables',
-    name: 'Paretos Editables',
-    url: 'https://juancdgo.github.io/paretos-editables/',
-    domainLabel: 'juancdgo.github.io/paretos-editables',
-    description:
-      'Tablero interactivo 80/20 para cargar categorías de fallas o ventas y visualizar Pareto al instante.',
-    category: 'miniapps',
-    badge: 'GitHub Pages',
-    tagLabel: 'Análisis 80/20',
-    icon: 'chart',
   },
   {
     id: 'juan-marcelo',

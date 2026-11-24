@@ -36,6 +36,7 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
 
     const badgeMap: Record<PlatformCategory, string> = {
       cloud: 'Cloud',
+      work: 'Apps Laborales',
       netlify: 'Netlify',
       desktop: 'Local / LAN',
       miniapps: 'Web App',
@@ -53,8 +54,8 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
       suite: category === 'cloud' ? 'facil' : 'legacy',
       badge: category === 'cloud' ? 'Sistema Fácil' : badgeMap[category],
       tagLabel: tagLabel.trim() || 'Personalizado',
-      icon: 'link',
-      highlight: 'emerald',
+      icon: category === 'work' ? 'factory' : 'link',
+      highlight: category === 'work' ? 'amber' : 'emerald',
       isCustom: true,
     });
 
@@ -124,6 +125,7 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
               className="mt-1.5 w-full rounded-xl border border-[#262E3D] bg-[#0C0F14] px-3 py-2 text-xs text-[#F3F4F6] focus:border-emerald-500 focus:outline-none"
             >
               <option value="cloud">Sistema Fácil (Firebase)</option>
+              <option value="work">Apps Laborales (Fábrica / Calidad)</option>
               <option value="netlify">Netlify</option>
               <option value="desktop">SGU / Local LAN</option>
               <option value="miniapps">Mini Apps Web</option>

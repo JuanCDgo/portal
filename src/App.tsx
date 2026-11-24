@@ -134,6 +134,7 @@ export function App() {
       all: allApps.length,
       pinned: allApps.filter((a) => pinnedIds.includes(a.id)).length,
       cloud: allApps.filter((a) => a.suite === 'facil' || a.category === 'cloud').length,
+      work: allApps.filter((a) => a.category === 'work').length,
       netlify: allApps.filter((a) => a.category === 'netlify').length,
       desktop: allApps.filter((a) => a.category === 'desktop').length,
       miniapps: allApps.filter((a) => a.category === 'miniapps').length,
@@ -184,8 +185,18 @@ export function App() {
     [filteredApps, sortWithPinned],
   );
 
+  const workApps = useMemo(
+    () => sortWithPinned(filteredApps.filter((a) => a.category === 'work')),
+    [filteredApps, sortWithPinned],
+  );
+
   const legacyApps = useMemo(
-    () => sortWithPinned(filteredApps.filter((a) => a.suite !== 'facil' && a.category !== 'cloud')),
+    () =>
+      sortWithPinned(
+        filteredApps.filter(
+          (a) => a.suite !== 'facil' && a.category !== 'cloud' && a.category !== 'work',
+        ),
+      ),
     [filteredApps, sortWithPinned],
   );
 
@@ -308,6 +319,7 @@ export function App() {
     { id: 'all', label: 'Todos', count: counts.all },
     { id: 'pinned', label: 'Fijados', count: counts.pinned },
     { id: 'cloud', label: 'Sistema Fácil', count: counts.cloud },
+    { id: 'work', label: 'Apps Laborales', count: counts.work },
     { id: 'netlify', label: 'Netlify', count: counts.netlify },
     { id: 'desktop', label: 'SGU & Local', count: counts.desktop },
     { id: 'miniapps', label: 'Mini Apps v1', count: counts.miniapps },
@@ -329,7 +341,7 @@ export function App() {
                   Hub Operativo
                 </h1>
                 <span className="hidden rounded-md border border-[#262E3D] bg-[#141820] px-1.5 py-0.5 font-mono text-[10px] font-medium text-[#9CA3AF] sm:inline-block">
-                  v2.2
+                  v2.3
                 </span>
               </div>
               <p className="truncate text-xs text-[#9CA3AF]">
@@ -522,6 +534,31 @@ export function App() {
                   </div>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {facilApps.map(renderAppCard)}
+                  </div>
+                </section>
+              )}
+
+              {workApps.length > 0 && (
+                <section
+                  className="space-y-3 rounded-2xl border border-amber-500/25 bg-amber-950/10 p-4 sm:p-5"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-amber-500/20 pb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-sm font-bold tracking-tight text-white sm:text-base">
+                          Apps Laborales · Fábrica y Calidad
+                        </h2>
+                        <span className="rounded-md border border-amber-500/35 bg-amber-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-amber-300">
+                          Mejora Continua ({workApps.length})
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-[#9CA3AF]">
+                        Herramientas operativas de planta: Pareto 80/20, Ishikawa 6M, Caminata Gemba, Auditoría WiFi y Control Patria.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {workApps.map(renderAppCard)}
                   </div>
                 </section>
               )}

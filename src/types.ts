@@ -1,5 +1,6 @@
 export type PlatformCategory =
   | 'cloud'
+  | 'work'
   | 'netlify'
   | 'desktop'
   | 'miniapps'
