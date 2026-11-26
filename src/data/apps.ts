@@ -206,6 +206,27 @@ export const INITIAL_APPS: AppEntry[] = [
     highlight: 'amber',
   },
 
+  // --- SOCIAL & LABORATORIO (TIEMPO REAL, EVENTOS & EXPERIMENTOS) ---
+  {
+    id: 'haymatch',
+    name: 'HayMatch',
+    url: 'https://haymatch.kaizen-jm.workers.dev',
+    domainLabel: 'haymatch.kaizen-jm.workers.dev',
+    description:
+      'Votación grupal en vivo (tarjetas Sí/No, podio y desempate) + Vaquita dual (Cuota/Señas con QR o Dividir Gastos) sobre Cloudflare WebSockets.',
+    category: 'social',
+    badge: 'Cloudflare · En Vivo',
+    tagLabel: 'Votación & Vaquita',
+    icon: 'sparkles',
+    highlight: 'sky',
+    secondaryAction: {
+      label: 'Repo GitHub',
+      url: 'https://github.com/JuanCDgo/haymatch',
+    },
+    manualUserUrl: 'https://github.com/JuanCDgo/haymatch/blob/main/MANUAL_USUARIO.md',
+    manualTechUrl: 'https://github.com/JuanCDgo/haymatch/blob/main/MANUAL_TECNICO.md',
+  },
+
   // --- NETLIFY ---
   {
     id: 'stock-negocios',

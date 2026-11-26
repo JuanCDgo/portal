@@ -37,6 +37,7 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
     const badgeMap: Record<PlatformCategory, string> = {
       cloud: 'Cloud',
       work: 'Apps Laborales',
+      social: 'Social & Lab',
       netlify: 'Netlify',
       desktop: 'Local / LAN',
       miniapps: 'Web App',
@@ -126,6 +127,7 @@ export function AddLinkDialog({ open, onClose, onAdd }: AddLinkDialogProps) {
             >
               <option value="cloud">Sistema Fácil (Firebase)</option>
               <option value="work">Apps Laborales (Fábrica / Calidad)</option>
+              <option value="social">Social &amp; Laboratorio (Tiempo Real)</option>
               <option value="netlify">Netlify</option>
               <option value="desktop">SGU / Local LAN</option>
               <option value="miniapps">Mini Apps Web</option>

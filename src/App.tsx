@@ -135,6 +135,7 @@ export function App() {
       pinned: allApps.filter((a) => pinnedIds.includes(a.id)).length,
       cloud: allApps.filter((a) => a.suite === 'facil' || a.category === 'cloud').length,
       work: allApps.filter((a) => a.category === 'work').length,
+      social: allApps.filter((a) => a.category === 'social').length,
       netlify: allApps.filter((a) => a.category === 'netlify').length,
       desktop: allApps.filter((a) => a.category === 'desktop').length,
       miniapps: allApps.filter((a) => a.category === 'miniapps').length,
@@ -190,11 +191,20 @@ export function App() {
     [filteredApps, sortWithPinned],
   );
 
+  const socialApps = useMemo(
+    () => sortWithPinned(filteredApps.filter((a) => a.category === 'social')),
+    [filteredApps, sortWithPinned],
+  );
+
   const legacyApps = useMemo(
     () =>
       sortWithPinned(
         filteredApps.filter(
-          (a) => a.suite !== 'facil' && a.category !== 'cloud' && a.category !== 'work',
+          (a) =>
+            a.suite !== 'facil' &&
+            a.category !== 'cloud' &&
+            a.category !== 'work' &&
+            a.category !== 'social',
         ),
       ),
     [filteredApps, sortWithPinned],
@@ -320,6 +330,7 @@ export function App() {
     { id: 'pinned', label: 'Fijados', count: counts.pinned },
     { id: 'cloud', label: 'Sistema Fácil', count: counts.cloud },
     { id: 'work', label: 'Apps Laborales', count: counts.work },
+    { id: 'social', label: 'Social & Lab', count: counts.social },
     { id: 'netlify', label: 'Netlify', count: counts.netlify },
     { id: 'desktop', label: 'SGU & Local', count: counts.desktop },
     { id: 'miniapps', label: 'Mini Apps v1', count: counts.miniapps },
@@ -559,6 +570,31 @@ export function App() {
                   </div>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {workApps.map(renderAppCard)}
+                  </div>
+                </section>
+              )}
+
+              {socialApps.length > 0 && (
+                <section
+                  className="space-y-3 rounded-2xl border border-sky-500/25 bg-sky-950/10 p-4 sm:p-5"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-sky-500/20 pb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-sm font-bold tracking-tight text-white sm:text-base">
+                          Social &amp; Laboratorio · Tiempo Real
+                        </h2>
+                        <span className="rounded-md border border-sky-500/35 bg-sky-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold text-sky-300">
+                          Apps Libres ({socialApps.length})
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-[#9CA3AF]">
+                        Apps sociales, eventos grupales y experimentos fuera del rubro comercial (WebSockets, juegos, simuladores y herramientas creativas).
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {socialApps.map(renderAppCard)}
                   </div>
                 </section>
               )}
